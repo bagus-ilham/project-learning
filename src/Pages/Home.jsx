@@ -1,8 +1,11 @@
 import { Box, Button, Flex, Image, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
+import HeaderAll from '../Layouts/HeaderAll'
 
 const Home = () => {
   return (
+    <>
+    <HeaderAll />
     <Box mt={20}>
       <Flex mx={5}>
         <Flex direction={'column'} mr={10}>
@@ -25,6 +28,7 @@ const Home = () => {
         />
       </Flex>
     </Box>
+    </>
   )
 }
 

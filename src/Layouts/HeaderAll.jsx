@@ -8,37 +8,42 @@ import {
   Image
 } from '@chakra-ui/react';
 import DesktopNav from './Components/DesktopNav';
-import { useAuthDispatch, useAuthState } from '../Context/Context';
-import { useLocation } from 'react-router-dom';
-import { LayoutHeader, WithHeader } from '../Context/Action';
+// import { useAuthDispatch, useAuthState } from '../Context/Context';
+import { useLocation, useNavigate } from 'react-router-dom';
+// import { LayoutHeader, WithHeader } from '../Context/Action';
+import ButtonNav from './Components/ButtonNav';
 
 const HeaderAll = () => {
-  const dispatch = useAuthDispatch()
-  const { layout } = useAuthState()
-  const location = useLocation()
-  const Load = () => {
-    const loc = location.pathname
-    if (loc === '/Login' && '/SignUp') {
-      LayoutHeader(dispatch)
-    } else {
-      WithHeader(dispatch)
-    }
-  }
+  // const dispatch = useAuthDispatch()
+  // const { layout } = useAuthState()
+  // const location = useLocation()
+  // const Load = () => {
+  //   const loc = location.pathname
+  //   if (loc === '/Login' && '/SignUp') {
+  //     LayoutHeader(dispatch)
+  //   } else {
+  //     WithHeader(dispatch)
+  //   }
+  // }
 
+  const navigate = useNavigate()
   const handleLogin = () => {
-    console.log('first')
+    navigate('/Login')
   }
   const handleSignUp = () => {
-    console.log('first')
+    navigate('/SignUp')
+  }
+  const handleBack = () => {
+    navigate('/')
   }
 
-  useEffect(() => {
-    Load()
-  }, [location.pathname])
+  // useEffect(() => {
+  //   Load()
+  // }, [location.pathname])
   return (
     <>
-      {layout === false}
-      <>
+      {/* {layout === false} */}
+      {/* <> */}
         <Box>
           <Flex
             bg={useColorModeValue('white', 'gray.800')}
@@ -57,34 +62,30 @@ const HeaderAll = () => {
               <Image
                 maxHeight={32.16}
                 maxWidth={200}
-                src='https://www.learndash.com/wp-content/uploads/LearnDash-logo-black.png.webp' />
+                src='https://www.learndash.com/wp-content/uploads/LearnDash-logo-black.png.webp'
+                onClick={handleBack} />
               <Flex display={{ base: 'center', md: 'center' }} ml={'20%'}>
                 <DesktopNav />
               </Flex>
             </Flex>
 
             <Stack direction='row' spacing={4}>
-              <Button colorScheme='messenger'
+              <ButtonNav
+                colorScheme='messenger'
                 variant='solid'
-                h='40px'
-                w='100px'
-                borderRadius='10px'
-                onClick={handleLogin}>
-                Login
-              </Button>
-              <Button
+                text='Login'
+                onClick={handleLogin}
+              />
+              <ButtonNav
                 colorScheme='messenger'
                 variant='outline'
-                h='40px'
-                w='100px'
-                borderRadius='10px'
-                onClick={handleSignUp}>
-                SignUp
-              </Button>
+                text='SignUp'
+                onClick={handleSignUp}
+              />
             </Stack>
           </Flex>
         </Box>
-      </>
+      {/* </> */}
     </>
   )
 }
